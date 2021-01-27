@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { User } = require("../models/user");
+const { User } = require("../../models/user");
 
 const signup = async (req, res) => {
   const { firstname, lastname, email, _password, profilePic } = req.body;
@@ -12,7 +12,7 @@ const signup = async (req, res) => {
     }
     if (result) {
       return res.status(400).json({
-        message: "user already exists",
+        message: "admin already exists",
       });
     }
     const user = new User({
@@ -21,7 +21,7 @@ const signup = async (req, res) => {
       email,
       _password,
       profilePic,
-      role: "user",
+      role: "admin",
     });
     const password = await bcrypt.hash(_password, 10);
     user.save((err, data) => {

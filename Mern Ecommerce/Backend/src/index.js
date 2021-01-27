@@ -1,7 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const admin = require("./routes/admin/admin");
+const user = require("./routes/user");
+const category = require("./routes/category");
+const product = require("./routes/product");
 require("dotenv").config();
-const userRoute = require("./routes/user");
 
 const app = express();
 
@@ -20,7 +23,11 @@ mongoose
 //mongodb+srv://admin:<password>@cluster0.pmn5n.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 app.use(express.json());
-app.use("/user", userRoute);
+
+app.use("/api", admin);
+app.use("/api", user);
+app.use("/api", category);
+app.use("/api", product);
 
 app.get("/", (req, res) => {
   res.status(200).json({

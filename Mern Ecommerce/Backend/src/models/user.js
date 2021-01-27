@@ -4,14 +4,9 @@ const bcrypt = require("bcrypt");
 const user = new mongoose.Schema({
   firstname: {
     type: String,
-    maxlength: 20,
-    minlength: 5,
-    required: true,
   },
   lastname: {
     type: String,
-    maxlength: 20,
-    minlength: 5,
   },
   email: {
     type: String,
@@ -22,13 +17,17 @@ const user = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+  },
+  role: {
+    type: String,
   },
 });
 
 user.methods = {
-  validatePassword: function (password) {
-    return bcrypt.compareSync(password, this.password);
+  validatePassword: async function (password) {
+    //console.log(password, this.password);
+    const isValid = await bcrypt.compare(password, this.password, () => {});
+    return isValid;
   },
 };
 
