@@ -17,10 +17,8 @@ mongoose
       useCreateIndex: true,
     }
   )
-  .then(() => console.log("CONNECTED"))
+  .then(() => console.log("successfully connected"))
   .catch((err) => console.log(err));
-
-//mongodb+srv://admin:<password>@cluster0.pmn5n.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 app.use(express.json());
 
@@ -29,11 +27,6 @@ app.use("/api", user);
 app.use("/api", category);
 app.use("/api", product);
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    text: "hello",
-  });
-});
 app.listen(process.env.PORT, () => {
   console.log("server has started running");
 });
